@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<script type="text/javascript">
+  //存储code的值
+  var urlParams = _GetUrlParams();
+  var code = urlParams.code || false;
+  if (code) {//如果url中有code，将其存入本地缓存，清空search;code就等于url中的code
+      localStorage.setItem('code', code);
+      window.location.search = ''
+  } else {//如果url中没有code，就到本地缓存中去找，找到或没找到的情况
+      ENV.code = _getCodeFromCache();
+      
+  }
+
+  function _getCodeFromCache(){
+    code = localStorage.getItem('code')||false;
+    if(code){
+      return code;
+    }else{
+      window.location.href = "http://weixin.handsight.cn/vote/index.html";
+    }
+  }
+
+  
+</script>
+</body>
+
+</html>
