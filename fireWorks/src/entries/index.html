@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>放烟花开红包</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="index.css" />
+  <script src="../../dist/config.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    #canvas{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    #main{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .ant-modal-footer {
+      padding: 0;
+      height: 40px;
+    }
+    .rewardWrap .ant-modal-content{
+      background: rgba(0,0,0,0)!important;
+    }
+    .imgWrap img{
+      width: 100%;
+      max-width: 100%;
+    }
+    .timesWrap{
+      padding: 1.5rem 0px;
+      font-size: 18px;
+    }
+
+    .ant-message,
+    .ant-message > span {
+      display: block;
+      width: 100%;
+    }
+    .ant-message-notice {
+      width: 70%;
+      text-align: center;
+    }
+
+
+    .spin-circle {
+	    -webkit-animation: spin 1.3s 0s ease-in-out infinite;
+              animation: spin 1.3s 0s ease-in-out infinite;
+      -webkit-animation-fill-mode: both;
+              animation-fill-mode: both;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: scale(0);
+      }
+      100% {
+        -webkit-transform: scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="canvas"></div>
+  <audio style="display: none" id="music" loop preload="auto">
+    <source src="../../dist/music.mp3" type="audio/mp3">
+  </audio>
+</body>
+
+<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+<script src="../../dist/fireWorks.js"></script>
+<script src="common.js"></script>
+<script src="index.js"></script>
+
+</html>
