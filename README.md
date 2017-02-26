@@ -1,7 +1,6 @@
 # redux
 
-### createStore
-
+### createStore - redux中最核心的API
 ```
 import { createStore } from 'redux';
 const store = createStore(fn);
