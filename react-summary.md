@@ -213,7 +213,14 @@ path: path.resolve(__dirname, 'dist/assets')
 
 - 完成基本的配置，下一步配置 路由 router，配置redux
 
+- Html-webpack-plugin 插件的使用
+
+  - [插件使用方法讲解一博客园](http://www.cnblogs.com/haogj/p/5160821.html)
+  - [讲解二](https://segmentfault.com/a/1190000007294861)
+
 - ​
+
+
 
 2：运行一个js文件
 
