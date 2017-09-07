@@ -116,7 +116,104 @@ path: path.resolve(__dirname, 'dist/assets')
 
 **WHY???**
 
+### react+webpack项目搭建
 
+- ```
+  {
+    "name": "song-rr",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "webpack": "./node_modules/webpack/bin/webpack.js",
+      // 这里不能加 -hot
+      "start": "webpack-dev-server --content-base dist --inline",
+      "build": "webpack"
+    },
+    "author": "songxx",
+    "license": "ISC",
+    "devDependencies": {
+      "babel": "^6.23.0",
+      "babel-core": "^6.26.0",
+      "babel-loader": "^7.1.2",
+      "babel-preset-es2015": "^6.24.1",
+      "babel-preset-react": "^6.24.1",
+      "css-loader": "^0.28.7",
+      "less-loader": "^4.0.5",
+      "style-loader": "^0.18.2",
+      "webpack": "^3.5.5",
+      "webpack-dev-server": "^2.7.1"
+    },
+    "dependencies": {
+      "react": "^15.6.1",
+      "react-dom": "^15.6.1"
+    }
+  }
+  ```
+
+- ```
+  var webpack = require('webpack');
+  const path = require('path');
+
+  module.exports = {
+    entry: './app/index.js',
+    output: {
+      // path: 'dist',  // 这个是错误的写法，感觉只有下面写法才能运行，有时间研究一下为什么？
+      path: path.join(__dirname, 'dist'),
+      filename: '[name].js'
+    },
+    
+    // 为热加载 webpack-dev-server 配置的
+    devServer: {
+      historyApiFallback: true,
+      inline: true,
+    },
+    
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          loader: "babel-loader",
+          options: {
+            presets: ["es2015", "react"]
+          },
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+          ]
+        },
+        {
+          test: /\.less$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'less-loader',
+              options: {
+                noIeCompat: true
+              }
+            }
+          ]
+        },
+      ]
+      
+    },
+    plugins: [
+
+    ],
+  };
+  ```
+
+- 完成基本的配置，下一步配置 路由 router，配置redux
+
+- ​
 
 2：运行一个js文件
 
