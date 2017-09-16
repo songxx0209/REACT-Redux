@@ -286,6 +286,8 @@ path: path.resolve(__dirname, 'dist/assets')
 
     Babel 默认只转换新的 JavaScript 语法，而不转换新的 API。例如，Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法（比如 Object.assign）都不会转译。如果想使用这些新的对象和方法，必须使用 babel-polyfill.
 
+    [babel全家桶](https://github.com/brunoyang/blog/issues/20)
+
   - babel-plugin-transform-runtime，babel-runtime [链接地址](https://github.com/lmk123/blog/issues/45)
 
     ```
@@ -319,7 +321,118 @@ path: path.resolve(__dirname, 'dist/assets')
     }
     ```
 
+    使用async await 同步请求，不会出现三种请求状态（一个请求会在reducer中写三种type，代码量太多），减少了代码量，同时错误判断也可以在action中进行。
+
+
+
+
+- ##### 项目中引入 antd
+
+  - ```
+    $ npm install antd --save
+    ```
+
+  - 当配置 按需加载时，还是出现了一些问题，按需加载的配置
+
+    ```
+    // 首先需要 
+    $ npm install babel-plugin-import --save-dev
+
+    然后在 babel-loader 中配置
+    plugins: [
+      ["import", { libraryName: "antd", style: true }] // `style: "css"` 会加载 css 文件
+    ]
+    ```
+
+    配置之后，按需加载 的警告 消失了，但是 antd 的 css 样式并没有加载上来；
+
+    查看了资料，配置时没有问题的。
+
+    检测出， 是应为 css module，与 babel-plugin-import 可能有冲突，然后把 css module 关闭，就成功加载了 antd 的css 样式；
+
+    ```
+    {
+      loader: 'css-loader',
+      options: {
+        modules: false,  // 启动 css module
+        importLoaders: 1
+      }
+    },
+    ```
+
+    **但是这并不是我们想要的结果，css module在项目中时比较重要的功能，不能去掉**
+
+    #### 解决方案
+
+    ```
+    babel-loader 中配置
+    plugins: [
+      ["import", { libraryName: "antd", style: "css" }] // `style: true` 会加载 css 文件
+    ]
+
+    // 这里我们使用 按需加载 css 文件；
+    // 加载 css 文件，我们当然要配置相应的 css-loader 来编译 css 文件；
+    {
+    test: /\.css$/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' }
+      ],
+      include: /node_modules/
+    },
+
+    // 然后在 使用 less 时， 开启 css module
+    {
+      test: /\.less$/,
+      use: [
+      	'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,  // 启动 css module
+            importLoaders: 1,
+          }
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            noIeCompat: true,
+            paths: [
+              path.resolve(__dirname, "node_modules")
+            ]
+          }
+        }
+      ]
+    },
+
+    ```
+
     ​
+
+    ​
+
+- ##### 插件
+
+  - extract-text-webpack-plugin
+
+  - babel-plugin-antd
+
+  - babel-plugin-import
+
+    `babel-plugin-antd is renamed to babel-plugin-import`
+
+  - ​
+
+
+
+
+
+
+
+
+
+
+
 
 
 
