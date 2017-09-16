@@ -253,7 +253,73 @@ path: path.resolve(__dirname, 'dist/assets')
 
     ​
 
+- react redux 异步相关实践
 
+  - 首先选定 一款异步请求框架
+
+    ```
+    import promise from 'redux-promise-middleware';
+    此插件，使action中 发出的请求， 会有三种状态
+    PENDING
+    FULFILLED
+    REJECTED
+    ```
+
+  - 尝试使用 async await，报错
+
+    ##### regeneratorRuntime is not defined.
+
+    ```
+    I'm trying to use async, await from scratch on Babel 6, but I'm getting regeneratorRuntime is not defined.
+    ```
+
+    `babel-polyfill` is required. You must also install it in order to get async/await working.
+
+    `babel-polyfill`是可以的，但是这玩意儿太大了
+    现在6.0版本的babel改成了插件的形式，现在推荐的是`transform-runtime`
+
+    `babel-polyfill`是一股脑把全部都给你添加到js文件中，而现在的`transform-runtime`将会判断你哪些需要加载的，有选择性的进行加载，并且后者也不会污染全局变量。
+
+    **babel-polyfill**    **transform-runtime**  
+
+  - Babel-polyfill
+
+    Babel 默认只转换新的 JavaScript 语法，而不转换新的 API。例如，Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise 等全局对象，以及一些定义在全局对象上的方法（比如 Object.assign）都不会转译。如果想使用这些新的对象和方法，必须使用 babel-polyfill.
+
+  - babel-plugin-transform-runtime，babel-runtime [链接地址](https://github.com/lmk123/blog/issues/45)
+
+    ```
+    {
+      "plugins": [
+        ["transform-runtime", {
+          "helpers": false,
+          "polyfill": false,
+          "regenerator": true,
+          "moduleName": "babel-runtime"
+        }]
+      ]
+    }
+    ```
+
+  - #### redux-promise-middleware ， redux-promise 不是同一个东西
+
+    > 此中间件的功能， 应该是把一个promise对象转换为 json对象，同时为请求
+
+  - 个人感觉的action 最佳实践
+
+    ```
+    export let getData = () => {
+      return  async (dispatch) => {
+        let ss = await request.get('http://120.77.33.107:8000/web/get_datas/');
+        dispatch({
+          type: 'GET_DATA',
+          payload: ss,
+        });
+      };
+    }
+    ```
+
+    ​
 
 
 

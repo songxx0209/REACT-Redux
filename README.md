@@ -50,7 +50,7 @@ const store = createStore(fn);
 >
 > - ##### thunk 即为 redux-thunk中间件
 >
->   Action 是由store.dispatch方法发送的,而store.dispatch方法正常情况下，参数只能是对象，不能是函数.。所以需要使用中间件redux-thunk来改造store.dispatch，使其可以接受函数作为参数
+>   **Action 是由store.dispatch方法发送的,而store.dispatch方法正常情况下，参数只能是对象，不能是函数。**所以需要使用中间件redux-thunk来改造store.dispatch，使其可以接受函数作为参数
 >
 >   为什么要让参数可以接受函数呢？？？
 >
