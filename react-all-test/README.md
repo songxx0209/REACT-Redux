@@ -1,4 +1,4 @@
-# react 再学习
+# react 项目配置过程记录
 
 ### 1：webpack之屎 -  version ^3.5.5
 
@@ -118,14 +118,6 @@ path: path.resolve(__dirname, 'dist/assets')
 **WHY???**
 
 ### react+webpack项目搭建
-
-- ```
-
-  ```
-
-- ```
-
-  ```
 
 - 完成基本的配置，下一步配置 路由 router，配置redux
 
@@ -423,6 +415,48 @@ path: path.resolve(__dirname, 'dist/assets')
 
   - ​
 
+- [ESlint 配置](http://www.cnblogs.com/le0zh/p/5619350.html)
+
+  - 安装相关的包
+
+    ```
+    "babel-eslint": "^8.0.0",
+    "eslint": "^4.7.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2", // 上面连续三个配置，让我们可以使用Airbnb的ESLint配置
+    "eslint-plugin-react": "^7.3.0",  // 检测js错误
+    ```
+
+  - .eslintrc
+
+    ```
+    {
+        //文件名 .eslintrc.json
+        "env": {
+            "browser": true,
+            "es6": true,
+            "node": true,
+            "commonjs": true
+        },
+        "parser": "babel-eslint",
+      "rules": {
+        "strict": 0,
+        "react/jsx-no-bind": [2, {
+          "allowBind": true
+        }],
+        "import/no-duplicates": 0,
+        "react/prefer-stateless-function": 0,
+        "no-param-reassign": 0
+      },
+      "plugins": [
+        "react"
+      ],
+      "extends": "airbnb"
+    }
+    ```
+
+  - airbnb  使用别人已有的配置，省略了eslint rules。配置；
 
 
 
@@ -433,12 +467,7 @@ path: path.resolve(__dirname, 'dist/assets')
 
 
 
-
-
-
-
-
-2：运行一个js文件
+### 2：运行一个js文件
 
 ```
 node index.js
@@ -446,7 +475,7 @@ node index.js
 
 
 
-3：学习一个新东西， 首先要找到好的学习资料，这是至关重要的。当然能很好的学习官网资料更好，这也是后期的目标（成神之路，必经）
+### 3：学习一个新东西， 首先要找到好的学习资料，这是至关重要的。当然能很好的学习官网资料更好，这也是后期的目标（成神之路，必经）
 
 - 这个东西到底是啥子？
 - 它是干什么用的？
@@ -460,12 +489,37 @@ node index.js
 - 最后，学习的是一种思想，开发者开发过程的思想，可以看看源码；
 
 
-
-4：常见js错误
+### 4：常见js错误
 
 - **Module build failed: SyntaxError: Unexpected token (12:10)**
 
-5：记录-杂
+- ```
+  ERROR in ./app/index.js
+  Module not found: Error: Can't resolve './page/login' in '/Users/sxx/github/react-redux/react-all-test/app'
+  ```
+
+  将 .js 改为 .jsx 后缀名后就报上错，大概意思是说不能 解析 './page/login'，这个文件，这个文件是一jsx后缀的。所以修改webpack配置：
+
+  ```
+  resolve: {
+      modules: [
+        'node_modules',
+        path.resolve(__dirname, 'app')
+      ],
+      extensions: ['.js', '.json', '.jsx', '.css'],
+    },
+  plugins: [...]
+  ```
+
+  ​
+
+
+
+
+
+
+
+### 5：记录-杂
 
 **组件在初始化时会触发5个钩子函数：**
 

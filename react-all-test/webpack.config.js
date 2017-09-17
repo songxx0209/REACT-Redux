@@ -16,10 +16,11 @@ module.exports = {
     historyApiFallback: true,
     inline: true,
   },
+
   module: {
     rules: [
       {
-        test: /\.jsx?$/,         // Match both .js and .jsx files
+        test: /\.js[x]?$/,         // Match both .js and .jsx files
         exclude: /node_modules/, 
         loader: "babel-loader", 
         query:
@@ -68,11 +69,18 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'app')
+    ],
+    extensions: ['.js', '.json', '.jsx', '.css'],
+  },
   plugins: [
     new HtmlwebpackPlugin({
       template: 'template/index.html', // 模版地址
       title: 'Hello World app',
       inject: 'body', // js插入到body中
-    })
+    }),
   ],
 };

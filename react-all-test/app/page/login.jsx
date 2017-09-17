@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { Button } from 'antd';
-import { changeOne, changeTow, changeThree, changeFour, getData } from '../actions/testAction';
+import { getData } from '../actions/testAction';
 import Father from '../components/father';
 import styles from './login.less';
 
@@ -11,8 +11,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'one'
-    }
+      title: 'one',
+    };
   }
   componentWillMount() {
     console.log('will mount');
@@ -35,13 +35,12 @@ class Login extends Component {
   render() {
     console.log('login render');
     // const { data } = this.props;
-    const { title } = this.state;
+    // const { title } = this.state;
     return (
       <div>
-        {/* <p>{data.test.one}</p> */}
-         <p className={styles.pp}>title</p> 
+        <p className={styles.pp}>title</p>
         <Button type="primary" onClick={this.btn.bind(this)}>ss</Button>
-        <hr/>
+        <hr />
         <Father />
       </div>
     );
@@ -50,7 +49,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   console.log('state==', state);
-  return {data: state};
+  return { data: state };
 }
 
 // function mapDispatchToProps(dispatch) {
@@ -61,10 +60,11 @@ function mapStateToProps(state) {
 //   };
 // }
 
-const mapDispatchToProps =  ({
+const mapDispatchToProps = ({
   getData,
 });
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(Login);
