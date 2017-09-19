@@ -1,6 +1,7 @@
-var webpack = require('webpack');
+// const webpack = require('webpack');
 const path = require('path');
-var HtmlwebpackPlugin = require('html-webpack-plugin'); // 用于生成html文件
+const HtmlwebpackPlugin = require('html-webpack-plugin'); // 用于生成html文件
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
   entry: './app/index.js',
@@ -69,6 +70,7 @@ module.exports = {
       },
     ]
   },
+
   resolve: {
     modules: [
       'node_modules',
@@ -76,11 +78,15 @@ module.exports = {
     ],
     extensions: ['.js', '.json', '.jsx', '.css'],
   },
+
   plugins: [
     new HtmlwebpackPlugin({
       template: 'template/index.html', // 模版地址
       title: 'Hello World app',
       inject: 'body', // js插入到body中
+    }),
+    new OpenBrowserPlugin({
+      url: 'http://localhost:8000',
     }),
   ],
 };
