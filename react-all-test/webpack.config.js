@@ -72,6 +72,9 @@ module.exports = {
       path.resolve(__dirname, 'app'),
     ],
     extensions: ['.js', '.json', '.jsx', '.css'],
+    alias: {
+      actions: path.join(__dirname, '/app/actions'),
+    },
   },
 
   plugins: [

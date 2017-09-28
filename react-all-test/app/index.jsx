@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-// import { Router, Route, IndexRoute, hashHistory, createMemoryHistory } from 'react-router';
 
-// import aa from '_aa';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+
+import routes from './router';
 
 import store from './store';
-import Login from './page/login';
-// import styles from './index.less';
 
 
-// const history = createMemoryHistory(location);
-// console.log(Provider);
-// aa();
+const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Login />
+    <Router history={history}>
+      {routes}
+    </Router>
   </Provider>,
   document.getElementById('app'),
 );
