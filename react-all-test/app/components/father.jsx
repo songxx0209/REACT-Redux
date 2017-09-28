@@ -5,7 +5,6 @@ import { changeOne, changeTow, changeThree, changeFour } from '../actions/testAc
 import Son from './son';
 
 class Login extends Component {
-
   componentWillMount() {
     console.log('father will mount');
   }
@@ -25,7 +24,7 @@ class Login extends Component {
         <p>{data.test.tow}</p>
         <p>{this.props.ab}</p>
         <button onClick={this.btn.bind(this)}>btn</button>
-        <hr/>
+        <hr />
         <Son />
       </div>
     );
@@ -34,7 +33,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   // console.log('father', state);
-  return {data: state};
+  return { data: state };
 }
 
 export default connect(

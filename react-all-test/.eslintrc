@@ -1,12 +1,12 @@
 {
-    //文件名 .eslintrc.json
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true,
-        "commonjs": true
-    },
-    "parser": "babel-eslint",
+  //文件名 .eslintrc.json
+  "env": {
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "commonjs": true
+  },
+  "parser": "babel-eslint",
   "rules": {
     "strict": 0,
     "react/jsx-no-bind": [2, {

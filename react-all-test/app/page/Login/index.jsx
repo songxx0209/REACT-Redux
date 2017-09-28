@@ -3,9 +3,9 @@ import { dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { Button } from 'antd';
-import { getData } from '../actions/testAction';
-import Father from '../components/father';
-import styles from './login.less';
+import { getData } from '../../actions/testAction';
+import Father from '../../components/father';
+import styles from './index.less';
 
 class Login extends Component {
   constructor(props) {
