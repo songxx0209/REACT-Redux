@@ -13,10 +13,10 @@ class IndexPage extends Component {
     this.state = {};
   }
   componentWillMount() {
-    console.log('will mount');
+    
   }
   componentDidMount() {
-    console.log('did mount');
+    // console.log('did mount');
   }
   // shouldComponentUpdate() {
   //   console.log('should');
@@ -29,10 +29,14 @@ class IndexPage extends Component {
   }
 
   render() {
-    console.log('login render', this.props);
+    const { data } = this.props;
+    let list = this.props.data.get('list');
+    console.log('will mount', list);
     return (
       <div>
-        <p className={styles.pp}>title</p>
+        <div>
+          <img src="http://120.77.33.107/images/home-bg.jpg" alt=""/>
+        </div>
         <Button type="primary" onClick={this.btn}>ss</Button>
         <hr />
       </div>
@@ -42,7 +46,7 @@ class IndexPage extends Component {
 
 const mapStateToProps = (state) => {
   console.log('state==', state);
-  return { data: state };
+  return { data: state.articleList };
 };
 
 const mapDispatchToProps = ({

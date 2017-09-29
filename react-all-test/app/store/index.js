@@ -13,6 +13,6 @@ import reducer from '../reducers';
 
 // const middleware = applyMiddleware(promise(), thunk);
 // const middleware = applyMiddleware(promise(), thunk, logger);
-const middleware = applyMiddleware(promiseMiddleware, thunk, logger);
+const middleware = applyMiddleware(promiseMiddleware, thunk);
 
 export default createStore(reducer, middleware);
