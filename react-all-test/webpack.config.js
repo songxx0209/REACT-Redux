@@ -28,7 +28,16 @@ module.exports = {
           {
             presets: ['es2015', 'stage-0', 'react'],
             plugins: [
+<<<<<<< HEAD
+              ['transform-runtime', { // babel 只能转换js语法，对一些自带的API不具备转换功能，需要此插件或polyfill进行转换
+                helpers: false,
+                polyfill: true,
+                regenerator: true,
+                moduleName: 'babel-runtime',
+              }],
+=======
               ['transform-runtime'],
+>>>>>>> 97d637b4239c0fdcfc0330cb3ea32e884ea2ff68
               ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
             ],
           },
