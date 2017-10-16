@@ -80,7 +80,7 @@ module.exports = {
   plugins: [
     new HtmlwebpackPlugin({
       template: 'template/index.html', // 模版地址
-      title: 'Hello World app',
+      title: "songxx's blog",
       inject: 'body', // js插入到body中
     }),
     new OpenBrowserPlugin({

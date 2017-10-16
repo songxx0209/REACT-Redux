@@ -2,7 +2,7 @@ import I from 'immutable';
 
 
 const initialize = I.Map({
-  list: [1, 2, 3],
+  list: [],
 });
 
 export default function reducer(state = initialize, action) {
