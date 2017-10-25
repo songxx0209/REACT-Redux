@@ -5,6 +5,7 @@ import {
 
 import Login from './page/Login';
 import IndexPage from './page/IndexPage';
+import Test from './page/Test';
 
 /* 进入路由的判断 */
 // function isLogin(nextState, replaceState) {
@@ -22,6 +23,7 @@ const routes = (
   <Route>
     <Route path="/" component={IndexPage} onEnter={isLogin} />
     <Route path="/login" component={Login} />
+    <Route path="/test" component={Test} />
   </Route>
 );
 
