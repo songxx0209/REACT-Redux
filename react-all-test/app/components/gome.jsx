@@ -17,9 +17,7 @@ class Test extends Component {
 
   render() {
     return (
-      <div>
-      	<div className={this.props.name}>{ this.props.children }</div>
-      </div>
+      <div className={this.props.name}>{ this.props.children }</div>
     );
   }
 }
