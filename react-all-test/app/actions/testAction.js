@@ -41,8 +41,9 @@ export const changeFour = (data) => {
 // 使用 async await 将请求改为 同步，就不会触发请求的三个状态；
 export const getData = () => {
   return async (dispatch) => {
-    const { text } = await request.get('http://120.77.33.107:8000/web/get_datas/');
-    // console.log('ss==', text);
+    const data = await request.get('http://120.77.33.107:8000/web/get_datas/');
+    const { text } = data;
+    console.log('ss==', data);
     dispatch({
       type: 'GET_DATA',
       payload: text,
