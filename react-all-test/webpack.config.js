@@ -30,6 +30,7 @@ module.exports = {
             plugins: [
               ['transform-runtime'],
               ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
+              ['transform-decorators-legacy'],
             ],
           },
       },
