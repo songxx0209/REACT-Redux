@@ -24,13 +24,7 @@ export default function reducer(state = initialize, action) {
 
     case 'GET_DATA':
     {
-      // console.log('axios==', action.payload);
-      const articleInfo = JSON.parse(action.payload);
-
-      // console.log('ss', state.get('List'));
-      // const data = state.set('List', articleInfo);
-      // console.log('data.get()', data);
-      return state.set('list', articleInfo);
+      return state.set('list', action.payload);
     }
     default:
     {

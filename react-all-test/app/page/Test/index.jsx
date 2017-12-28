@@ -1,86 +1,79 @@
 import React, { Component } from 'react';
-import Gome from '../../components/gome';
+// import Gome from '../../components/gome';
+import { Spin } from 'antd';
 
-class Animal { 
-  constructor(name) {
-    this.name = name;
-  }
-  food() {
-    console.log(this.name + 'food');
-  }
-  speak() {
-    console.log(this.name + ' makes a noise.');
-  }
+// import request from 'superagent';
+
+const request = require('superagent');
+
+function loadingDecorator(target, key, descriptor) {
+  // console.log('h', target, 'a', key, 'v', descriptor);
+  const method = descriptor.value;
+  descriptor.value = async function (...args) {
+
+    this.setState({ loading: true });
+
+    const ret = await method.apply(this, args);
+
+    this.setState({ loading: false });
+    return ret;
+  };
+  return descriptor;
 }
-
-class Dog extends Animal {
-  speak() {
-    console.log(this.name + ' barks.');
-  }
-}
-
-var d = new Dog('Mitzie');
-// 'Mitzie barks.'
-d.speak();
-console.dir(Animal);
-console.dir(Dog);
-
-
-// function decorateArmour(target, key, descriptor) {
-//   console.log('h', target, 'a', key, 'v', descriptor);
-//   const method = descriptor.value;
-//   const moreDef = 100;
-//   let ret;
-//   descriptor.value = (...args) => {
-//     args[0] += moreDef;
-//     ret = method.apply(target, args);
-//     return ret;
+// function loadingDecorator(target, name, descriptor) {
+//   const run = descriptor.value;
+//   descriptor.value = async function () {
+//     // this.setState({ loading: true });
+//     console.log('i been losing sleep');
+//     const res = await run.apply(this, arguments);
+//     console.log('this.state.loading');
+//     // this.setState({ loading: false });
+//     return res;
 //   };
 //   return descriptor;
 // }
-
-// class Man {
-//   constructor(def = 2, atk = 3, hp = 3) {
-//     this.init(def, atk, hp);
-//   }
-
-//   @decorateArmour
-//   init(def, atk, hp) {
-//     this.def = def; // 防御值
-//     this.atk = atk;  // 攻击力
-//     this.hp = hp;  // 血量
-//   }
-//   toString() {
-//     return `防御力:${this.def},攻击力:${this.atk},血量:${this.hp}`;
-//   }
-// }
-
-// let tony = new Man();
-
-// console.log(`当前状态 ===> ${tony}`);
-
 
 class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: 'one',
+      loading: false,
+      data: [],
     };
   }
+
+  // @loadingDecorator
   componentWillMount() {
+    // request.get('http://120.77.33.107:8000/web/get_datas/').then((res) => {
+    //   this.setState({ data: res.body });
+    // });
     console.log('will mount');
   }
 
   componentDidMount() {
+    request.get('http://120.77.33.107:8000/web/get_datas/').then((res) => {
+      this.setState({ data: res.body });
+    });
+    // console.log(data);
     console.log('did mount');
   }
 
+  componentWillUpdate() {
+    console.log('will update');
+  }
+  componentDidUpdate() {
+    console.log('did update');
+  }
+
+
   render() {
+    console.log('render');
     return (
-      <div>
-        <p>hello world!</p>
-        <Gome />
-      </div>
+      <Spin spinning={this.state.loading}>
+        {this.state.data.map((item, i) => <p key={i}>{item.content}</p>)}
+        {/* <Gome /> */}
+      </Spin>
     );
   }
 }

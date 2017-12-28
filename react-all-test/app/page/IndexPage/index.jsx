@@ -7,7 +7,7 @@ import { Button, Layout, Row, Col, Select } from 'antd';
 import { getData } from 'actions/testAction';
 import styles from './index.less';
 
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 const Option = Select.Option;
 
 class IndexPage extends Component {
