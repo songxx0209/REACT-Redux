@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // import Gome from '../../components/gome';
 import { Spin } from 'antd';
+import cs from 'classnames';
 
+import styles from './index.less';
 // import request from 'superagent';
 
 const request = require('superagent');
@@ -68,11 +70,18 @@ class Test extends Component {
 
 
   render() {
-    console.log('render');
+    console.log('render', this);
+
+    const { className = '' } = this.props.route;
+    const testCss = cs({
+      [styles.fontContent]: true,
+    }, className);
     return (
       <Spin spinning={this.state.loading}>
-        {this.state.data.map((item, i) => <p key={i}>{item.content}</p>)}
         {/* <Gome /> */}
+        <p className={testCss}>hello world;</p>
+
+        {this.state.data.map((item, i) => <p key={i}>{item.content}</p>)}
       </Spin>
     );
   }
