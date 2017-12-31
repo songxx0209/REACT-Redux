@@ -13,6 +13,7 @@
   "author": "songxx",
   "license": "ISC",
   "devDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
     "axios": "^0.16.2",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
@@ -43,12 +44,16 @@
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^4.4.1",
     "redux-thunk": "^2.2.0",
+    "source-map-loader": "^0.2.3",
     "style-loader": "^0.18.2",
     "superagent": "^3.6.0",
+    "typescript": "^2.6.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3",
     "antd": "^2.13.1",
     "immutable": "^3.8.1",
     "react": "^15.6.1",
