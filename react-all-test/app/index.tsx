@@ -9,14 +9,13 @@
 // import store from './store';
 
 // const history = syncHistoryWithStore(browserHistory, store);
-
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 import Friend from './components/friend';
 
 ReactDOM.render(
-  <Friend compiler="TypeScript" framework="React" />,
+  <Friend compiler="TypeScript" framework="ss" />,
   document.getElementById('app'),
 );
 
