@@ -19,8 +19,8 @@ const myLogger = store => next => action => {
 };
 
 
-// const middleware = applyMiddleware(promise(), thunk);
+const middleware = applyMiddleware(promise(), thunk);
 // const middleware = applyMiddleware(promise(), thunk, logger);
-const middleware = applyMiddleware(promiseMiddleware, thunk, myLogger);
+// const middleware = applyMiddleware(promiseMiddleware, thunk, myLogger);
 
 export default createStore(reducer, middleware);

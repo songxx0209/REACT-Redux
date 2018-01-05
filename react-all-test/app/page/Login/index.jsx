@@ -1,70 +1,65 @@
 import React, { Component } from 'react';
-import { dispatch } from 'redux';
-import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
-import { Button } from 'antd';
-import { getData } from '../../actions/testAction';
-import Father from '../../components/father';
+import { Form, Input, Icon, Button, Spin } from 'antd';
 import styles from './index.less';
+
+const FormItem = Form.Item;
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'one',
+      loading: false,
     };
   }
-  componentWillMount() {
-    console.log('will mount');
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        localStorage.setItem('token', values.password);
+        browserHistory.push('/');
+        // this.setState({ loading: true })
+      } else {
+        console.log('请输入用户名或密码!');
+      }
+    });
   }
 
-  componentDidMount() {
-    console.log('did mount');
-  }
-  // shouldComponentUpdate() {
-  //   console.log('should');
-  //   return false;
-  // }
-  btn() {
-    // console.log('ss');
-    this.props.dispatch(getData());
-    // this.setState({
-    //   title: 'login',
-    // })
-  }
   render() {
-    console.log('login render');
-    // const { data } = this.props;
-    // const { title } = this.state;
+    const { getFieldDecorator } = this.props.form;
+
     return (
-      <div>
-        <p className={styles.pp}>title</p>
-        <Button type="primary" onClick={this.btn.bind(this)}>ss</Button>
-        <hr />
-        <Father />
+      <div className={styles.container}>
+        <Spin spinning={this.state.loading}>
+          <div className={styles.formContent}>
+            <h1>考研排名共享系统 - 后台管理</h1>
+            <Form onSubmit={this.handleSubmit} className={styles['login-form']}>
+              <FormItem>
+                {getFieldDecorator('userName', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(
+                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your Password!' }],
+                })(
+                  <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                )}
+              </FormItem>
+              <FormItem>
+                <Button type="primary" htmlType="submit" className="login-form-button">登录</Button>
+              </FormItem>
+            </Form>
+          </div>
+        </Spin>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  console.log('state==', state);
-  return { data: state };
-}
-
-// function mapDispatchToProps(dispatch) {
-//   // console.log('test---', dispatch);
-//   // // return dispatch({test});
-//   return {
-//     dispatch: (dispatch) => dispatch(),
-//   };
-// }
-
-const mapDispatchToProps = ({
-  getData,
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login);
+export default Form.create()(Login);
