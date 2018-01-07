@@ -18,7 +18,8 @@ module.exports = {
     inline: true,
     proxy: {
       '/examapi': {
-        target: 'http://47.94.218.224:80',
+        target: 'http://47.94.251.1:80',
+        // target: 'http://www.dashixiongky.com/',
         secure: false,
         pathRewrite: { '^/examapi': '' },
       },

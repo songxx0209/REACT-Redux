@@ -5,7 +5,7 @@ import { Steps, Button, Table } from 'antd';
 
 import styles from './common.less';
 import { ID } from '../lib/const';
-import { modifyId } from '../actions/examaction';
+import { modifyId, fetchExaminee } from '../actions/examaction';
 import DeleteItem from './common/delete-item';
 import AddItem from './common/add-item';
 import ModifyItem from './common/modify-item';
@@ -18,8 +18,8 @@ class Examinee extends Component {
     this.state = {};
   }
   componentWillMount() {
-    // const { provinceId } = this.props.examdata;
-    // this.props.fetchUniversity(provinceId);
+    const { provinceId } = this.props.examdata;
+    this.props.fetchExaminee(provinceId);
   }
   async add(name) {
     // await this.props.addProvince(name, 1);
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = ({ modifyId });
+const mapDispatchToProps = ({ modifyId, fetchExaminee });
 
 export default connect(
   mapStateToProps,

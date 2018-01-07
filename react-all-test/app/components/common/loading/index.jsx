@@ -15,7 +15,6 @@ function Loading(Container) {
     }
   };
   function mapStateToProps(state) {
-    console.log('dta', state);
     return {
       fetching: state.examdata.fetching,
     };

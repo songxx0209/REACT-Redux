@@ -43,10 +43,12 @@ class IndexPage extends Component {
     }, {
       title: '专业',
       content: <Major next={this.next.bind(this)} />,
-    }, {
-      title: '考生',
-      content: <Examinee next={this.next.bind(this)} />,
-    }];
+    }
+    // , {
+    //   title: '考生',
+    //   content: <Examinee next={this.next.bind(this)} />,
+    // }
+    ];
 
     let currentDisplay = null;
     for (let i = 0; i < steps.length; i++) {

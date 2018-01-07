@@ -5,10 +5,10 @@ import { Steps, Button, Table } from 'antd';
 
 import styles from './common.less';
 import { ID } from '../lib/const';
-import { modifyId } from '../actions/examaction';
+import { modifyId, fetchMajor, addMajor, modifyMajor, deleteMajor } from '../actions/examaction';
 import DeleteItem from './common/delete-item';
-import AddItem from './common/add-item';
-import ModifyItem from './common/modify-item';
+import MajorAdd from './majorAdd';
+import MajorModify from './majorModify';
 
 const Step = Steps.Step;
 
@@ -18,20 +18,27 @@ class Major extends Component {
     this.state = {};
   }
   componentWillMount() {
-    // const { provinceId } = this.props.examdata;
-    // this.props.fetchUniversity(provinceId);
+    const { collegeId } = this.props.examdata;
+    this.props.fetchMajor(collegeId);
   }
-  async add(name) {
-    // await this.props.addProvince(name, 1);
-    // this.props.fetchProvince();
+  async add(name, enroll, recommend, majorcode) {
+    const { collegeId } = this.props.examdata;
+
+    await this.props.addMajor(collegeId, majorcode, name, enroll, recommend);
+    this.props.fetchMajor(collegeId);
   }
-  async modify(record, name) {
-    // await this.props.modifyProvince(record.id, name, 1);
-    // this.props.fetchProvince();
+
+  async modify(record, name, enroll, recommend, majorcode) {
+    const { collegeId } = this.props.examdata;
+
+    await this.props.modifyMajor(collegeId, record.id, majorcode, name, enroll, recommend);
+    this.props.fetchMajor(collegeId);
   }
   async del(record) {
-    // await this.props.deleteProvince(record.id);
-    // this.props.fetchProvince();
+    const { collegeId } = this.props.examdata;
+
+    await this.props.deleteMajor(collegeId, record.id);
+    this.props.fetchMajor(collegeId);
   }
   next(record) {
     this.props.modifyId(ID.MAJOR, record.id);
@@ -47,16 +54,25 @@ class Major extends Component {
       title: '专业id',
       dataIndex: 'id',
     }, {
+      title: '招生人数',
+      dataIndex: 'enrollment',
+    }, {
+      title: '推免人数',
+      dataIndex: 'exempt',
+    }, {
+      title: '专业代码（别名）',
+      dataIndex: 'major_id',
+    }, {
       title: '操作',
       dataIndex: 'action',
       render: (text, record) => {
         return (
           <span>
-            <ModifyItem record={record} title={'专业名称'} onModify={this.modify.bind(this, record)} />
+            <MajorModify record={record} title={'专业名称'} onModify={this.modify.bind(this, record)} />
             <span className="ant-divider" />
             <DeleteItem record={record} title={'专业'} onDel={this.del.bind(this, record)} />
-            <span className="ant-divider" />
-            <a href="#" className="ant-dropdown-link" onClick={this.next.bind(this, record)}>查看专业下的考生</a>
+            {/* <span className="ant-divider" />
+            <a href="#" className="ant-dropdown-link" onClick={this.next.bind(this, record)}>查看专业下的考生</a> */}
           </span>
         );
       },
@@ -64,14 +80,14 @@ class Major extends Component {
     let dataSource = [];
     if (examdata.major.length !== 0) {
       dataSource = examdata.major.map((item, i) => {
-        return { ...item, key: i, name: item.major_name, id: item.major_id }
+        return { ...item, key: i, name: item.major_name }
       });
     }
 
     return (
       <div className={styles.container}>
         <div className={styles['top-content']}>
-          <AddItem btnName={'添加专业'} title={'专业'} onAdd={this.add.bind(this)} />
+          <MajorAdd btnName={'添加专业'} title={'专业'} onAdd={this.add.bind(this)} />
         </div>
         <Table dataSource={dataSource} columns={columns} />
       </div>
@@ -85,7 +101,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = ({ modifyId });
+const mapDispatchToProps = ({ modifyId, fetchMajor, addMajor, modifyMajor, deleteMajor });
 
 export default connect(
   mapStateToProps,

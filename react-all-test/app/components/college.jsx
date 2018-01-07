@@ -5,7 +5,7 @@ import { Steps, Button, Table } from 'antd';
 
 import styles from './common.less';
 import { ID } from '../lib/const';
-import { modifyId } from '../actions/examaction';
+import { modifyId, fetchCollege, addCollege, modifyCollege, deleteCollege } from '../actions/examaction';
 import DeleteItem from './common/delete-item';
 import AddItem from './common/add-item';
 import ModifyItem from './common/modify-item';
@@ -18,20 +18,25 @@ class College extends Component {
     this.state = {};
   }
   componentWillMount() {
-    // const { provinceId } = this.props.examdata;
-    // this.props.fetchUniversity(provinceId);
+    const { universityId } = this.props.examdata;
+    this.props.fetchCollege(universityId);
   }
   async add(name) {
-    // await this.props.addProvince(name, 1);
-    // this.props.fetchProvince();
+    const { universityId } = this.props.examdata;
+    await this.props.addCollege(universityId, name);
+    this.props.fetchCollege(universityId);
   }
   async modify(record, name) {
-    // await this.props.modifyProvince(record.id, name, 1);
-    // this.props.fetchProvince();
+    const { universityId } = this.props.examdata;
+
+    await this.props.modifyCollege(universityId, record.id, name);
+    this.props.fetchCollege(universityId);
   }
   async del(record) {
-    // await this.props.deleteProvince(record.id);
-    // this.props.fetchProvince();
+    const { universityId } = this.props.examdata;
+
+    await this.props.deleteCollege(universityId, record.id);
+    this.props.fetchCollege(universityId);
   }
   next(record) {
     this.props.modifyId(ID.COLLEGE, record.id);
@@ -64,7 +69,7 @@ class College extends Component {
     let dataSource = [];
     if (examdata.college.length !== 0) {
       dataSource = examdata.college.map((item, i) => {
-        return { ...item, key: i, name: item.college_name, id: item.college_id }
+        return { ...item, key: i, name: item.college_name }
       });
     }
 
@@ -85,7 +90,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = ({ modifyId });
+const mapDispatchToProps = ({ modifyId, fetchCollege, addCollege, modifyCollege, deleteCollege });
 
 export default connect(
   mapStateToProps,

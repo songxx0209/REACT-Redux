@@ -5,7 +5,7 @@ import { Steps, Button, Table } from 'antd';
 
 import styles from './common.less';
 import { ID } from '../lib/const';
-import { modifyId, fetchUniversity } from '../actions/examaction';
+import { modifyId, fetchUniversity, addUniversity, modifyUniversity, deleteUniversity } from '../actions/examaction';
 import DeleteItem from './common/delete-item';
 import AddItem from './common/add-item';
 import ModifyItem from './common/modify-item';
@@ -23,16 +23,20 @@ class University extends Component {
     this.props.fetchUniversity(provinceId);
   }
   async add(name) {
-    // await this.props.addProvince(name, 1);
-    // this.props.fetchProvince();
+    const { provinceId } = this.props.examdata;
+    await this.props.addUniversity(provinceId, name, 1);
+    this.props.fetchUniversity(provinceId);
   }
   async modify(record, name) {
-    // await this.props.modifyProvince(record.id, name, 1);
-    // this.props.fetchProvince();
+    const { provinceId } = this.props.examdata;
+    await this.props.modifyUniversity(provinceId, record.id, name, 1);
+    this.props.fetchUniversity(provinceId);
   }
   async del(record) {
-    // await this.props.deleteProvince(record.id);
-    // this.props.fetchProvince();
+    const { provinceId } = this.props.examdata;
+    // console.log(provinceId, record.id);
+    await this.props.deleteUniversity(provinceId, record.id);
+    this.props.fetchUniversity(provinceId);
   }
   next(record) {
     this.props.modifyId(ID.UNIVERSITY, record.id);
@@ -64,7 +68,7 @@ class University extends Component {
     let dataSource = [];
     if (university.length !== 0) {
       dataSource = university.map((item, i) => {
-        return { ...item, key: i, name: item.university_name, id: item.university_id }
+        return { ...item, key: i, name: item.university_name }
       });
     }
 
@@ -85,7 +89,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = ({ modifyId, fetchUniversity });
+const mapDispatchToProps = ({ modifyId, fetchUniversity, addUniversity, modifyUniversity, deleteUniversity });
 
 export default connect(
   mapStateToProps,
