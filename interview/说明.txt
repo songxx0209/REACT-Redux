@@ -1,5 +1,0 @@
-1：可以打开dist文件，打开index.html查看demo；
-
-2：亦可以通过终端 npm install , npm start 
-   在浏览器中打开 localhost://8989 查看demo
-                  
