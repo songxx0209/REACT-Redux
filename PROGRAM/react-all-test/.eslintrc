@@ -1,0 +1,26 @@
+{
+  //文件名 .eslintrc.json
+  "env": {
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "commonjs": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "react/jsx-no-bind": [2, {
+      "allowBind": true
+    }],
+    "import/no-duplicates": 0,
+    "react/prefer-stateless-function": 0,
+    "no-param-reassign": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/prop-types": 0
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": "airbnb"
+}
+
