@@ -1,10 +1,9 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
-
-// import articleList from './articleList';
-import examdata from './examdata';
+// import test from './test';
+import articleList from './articleList';
 
 export default combineReducers({
   routing,
-  examdata,
+  articleList,
 });

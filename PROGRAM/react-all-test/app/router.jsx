@@ -1,18 +1,21 @@
 import React from 'react';
 import {
   Route,
-  browserHistory
 } from 'react-router';
 
 import Login from './page/Login';
 import IndexPage from './page/IndexPage';
 
-/* 进入路由的判断  nextState, replaceState */
+/* 进入路由的判断 */
+// function isLogin(nextState, replaceState) {
+// const token = sessionStorage.getItem('token')
+// if (!token) {
+//   replaceState('/login')
+//   // hashHistory.push('/login')
+// }
+// }
 function isLogin() {
-  const token = localStorage.getItem('token')
-  if (!token) {
-    browserHistory.push('/login');
-  }
+  console.log('good');
 }
 
 const routes = (
@@ -23,4 +26,3 @@ const routes = (
 );
 
 export default routes;
-

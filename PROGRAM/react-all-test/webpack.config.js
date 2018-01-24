@@ -16,14 +16,6 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     inline: true,
-    proxy: {
-      '/examapi': {
-        target: 'http://47.94.251.1:80',
-        // target: 'http://www.dashixiongky.com/',
-        secure: false,
-        pathRewrite: { '^/examapi': '' },
-      },
-    },
   },
 
   module: {
@@ -38,7 +30,6 @@ module.exports = {
             plugins: [
               ['transform-runtime'],
               ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
-              ['transform-decorators-legacy'],
             ],
           },
       },
