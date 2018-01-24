@@ -8,10 +8,9 @@
 
 # node
 node_modules
-./PROGRAM/**/package-lock.json
 ./PROGRAM/**/node_modules
 npm-debug.log
 
 # other
 dist/*.js
-
+./PROGRAM/**/package-lock.json
