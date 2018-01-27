@@ -4,7 +4,6 @@ import { Modal, Button } from 'antd';
 import styles from './index.less';
 
 export default class Confirm extends Component {
-
   static propTypes = {
     title: PropTypes.string,
     btnName: PropTypes.string,
@@ -50,7 +49,7 @@ export default class Confirm extends Component {
           onCancel={this.handleCancel.bind(this)}
           onOk={this.handleOk.bind(this)}
         >
-          <p>确定要删除 <span style={{ color: 'red' }}>{record.name}省</span> 吗？</p>
+          <p>确定要删除 <span style={{ color: 'red' }}>{record.name}</span> 吗？</p>
         </Modal>
       </div>
     );
