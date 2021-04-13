@@ -125,7 +125,7 @@ const action = {
 
 react设计思路个人理解, 视图View 与数据是一一对应的, 数据一改变view也会改变;  
 
-那么数据怎么改变呢? 
+那么数据怎么改变呢?  
 
 用户在view层触发事件，view层向存放数据的Store发送一条消息,我要改变数据了； 
 
@@ -137,7 +137,7 @@ react设计思路个人理解, 视图View 与数据是一一对应的, 数据一
 
 `store.dispatch()`是 View 发出 Action 的唯一方法。
 
-​	dispatch默认只接受对象作为参数,如{type: 'ADD_TODO',payload: 'Learn Redux'}  
+​	dispatch默认只接受对象作为参数,如{type: 'ADD_TODO',payload: 'Learn Redux'}
 
 ​	如果想要接受函数function作为参数, 就需要通过中间件 （middleware）
 
